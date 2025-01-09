@@ -47,15 +47,19 @@ public class Movement : MonoBehaviour
             {
                 activeSprite = 0;
             }
-            transform.Translate(moveDis.normalized * 0.1f);
+            
             if (moveDis.x > 0)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                transform.rotation = Quaternion.Euler(0,0,0);
+                
             }
             if (moveDis.x < 0)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                transform.Translate(new Vector2(-moveDis.x * 0.2f,0));
             }
+            transform.Translate(moveDis.normalized * 0.1f);
+
             gameObject.GetComponent<SpriteRenderer>().sprite = moveSprites[activeSprite];
         }
         else
