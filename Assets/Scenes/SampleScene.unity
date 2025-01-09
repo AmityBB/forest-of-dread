@@ -338,10 +338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  baseHealth: 0
+  baseHealth: 500
   health: 500
-  baseDefence: 0
-  defence: 0
+  baseDefence: 25
+  defence: 25
   weakness: 
 --- !u!212 &621534060
 SpriteRenderer:

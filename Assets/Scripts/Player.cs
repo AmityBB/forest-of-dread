@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     {
         if(health > maxHealth) health = maxHealth;
     }
+
+    // function for the main scythe attack. starts the attack animation and enables the attack hitbox
     public void MainAttack(CallbackContext _context)
     {
         if (_context.performed && !attacking)
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour
             StartCoroutine(AttackCD());
         }
     }
+
+    //disables the attack hitbox after a small amount of time and resets the animation trigger for the attack
     IEnumerator AttackCD()
     {
         yield return new WaitForSeconds(0.2f);
@@ -43,6 +47,8 @@ public class Player : MonoBehaviour
         Weapon.GetComponent<Animator>().ResetTrigger("attack");
         attacking = false;
     }
+
+    //function for the player taking damage also makes an event so that the healthbar knows when the player takes damage
     public void TakeDamage(float dmg)
     {
         health -= dmg;

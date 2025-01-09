@@ -9,6 +9,8 @@ public class WeaponScript : MonoBehaviour
     public int critDMG;
     public string element;
     public GameObject critSpark;
+
+    //attack function checks which hitboxes it's damage hitbox hit and then calculates damage for each of them separately
     public void DoAttack(Collider2D col)
     {
         LayerMask mask = LayerMask.GetMask("Player", "Weapon");
