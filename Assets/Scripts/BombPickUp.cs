@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombPickUp : PickUp
+public class BombPickUp : MonoBehaviour, IPickUpAble
 {
-    public override void PickUpAction(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        PickUpAction(other);
+    }
+    public void PickUpAction(Collider2D col)
     {
         col.GetComponent<Player>().bombs += 1;
-        base.PickUpAction(col);
+        Destroy(gameObject);
     }
 }

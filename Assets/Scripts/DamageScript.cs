@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics;
 
-public class DamageScript : MonoBehaviour
+interface Idamageable
 {
-    
+    void TakeDamage(float amount, string element);
 }

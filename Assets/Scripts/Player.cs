@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, Idamageable
 {
     public static event Action OnPlayerDamaged;
 
@@ -49,17 +49,16 @@ public class Player : MonoBehaviour
     }
 
     //function for the player taking damage also makes an event so that the healthbar knows when the player takes damage
-    public void TakeDamage(float dmg)
+    public void TakeDamage(float amount, string element)
     {
-        health -= dmg;
+        health -= amount;
         OnPlayerDamaged?.Invoke();
-
-        
-        if(health <= 0)
+        if (health <= 0)
         {
             Die();
         }
     }
+
     public void Die()
     {
         gameObject.GetComponent<Movement>().enabled = false;
