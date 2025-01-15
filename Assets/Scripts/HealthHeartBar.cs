@@ -13,6 +13,7 @@ public class HealthHeartBar : MonoBehaviour
         Player.OnPlayerDamaged += DrawHearts;
         HeartPickUp.OnPickUp += DrawHearts;
         Enemy.PlayerInteract += DrawHearts;
+        Bomb.PlayerInteract += DrawHearts;
     }
 
     private void OnDisable()
@@ -20,6 +21,7 @@ public class HealthHeartBar : MonoBehaviour
         Player.OnPlayerDamaged -= DrawHearts;
         HeartPickUp.OnPickUp -= DrawHearts;
         Enemy.PlayerInteract -= DrawHearts;
+        Bomb.PlayerInteract -= DrawHearts;
     }
 
     private void Awake()

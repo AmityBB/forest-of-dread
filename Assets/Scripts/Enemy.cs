@@ -8,13 +8,13 @@ public class Enemy : MonoBehaviour, Idamageable
     public static event Action PlayerInteract;
     public GameObject player;
 
-    public int damage;
-    public float baseHealth;
-    public float health;
-    public float baseDefence;
-    public float defence;
+    [SerializeField] private int damage;
+    [SerializeField] private float baseHealth;
+    [SerializeField] private float health;
+    [SerializeField] private float baseDefence;
+    [SerializeField] private float defence;
     public float speed;
-    public float baseSpeed;
+    [SerializeField] private float baseSpeed;
     public string weakness;
     private bool isSlowed;
     private bool rooted;
@@ -51,11 +51,30 @@ public class Enemy : MonoBehaviour, Idamageable
             case "Plant":
                 rooted = true;
                 break;
+            case "Explosion":
+                if (weakness == "Explosion")
+                {
+                    baseDefence *= 0.5f;
+                    defence *= 0.5f;
+                }
+                else
+                {
+                    baseDefence *= 0.75f;
+                    defence *= 0.75f;
+                }
+                break;
         }
         amount = amount * (1 - (defence / 100));
         if(element == weakness)
         {
-            amount *= 1.4f;
+            if (element == null)
+            {
+                amount *= 1.65f;
+            }
+            else
+            {
+                amount *= 1.4f;
+            }
         }
         health -= amount;
         if (health < 0)

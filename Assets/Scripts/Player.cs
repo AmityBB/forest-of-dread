@@ -10,14 +10,17 @@ public class Player : MonoBehaviour, Idamageable
 
     [SerializeField] private Sprite[] deathSprites;
 
-    public GameObject Weapon;
-    public GameObject WeaponHitbox;
+    private Inventory inventory;
+    public GameObject Bowomb;
     private bool attacking;
     public float health = 6;
     public float maxHealth = 6;
-    public int bombs;
     public int money;
 
+    private void Awake()
+    {
+        inventory = GetComponent<Inventory>();
+    }
 
 
     private void Update()
@@ -30,21 +33,42 @@ public class Player : MonoBehaviour, Idamageable
     {
         if (_context.performed && !attacking)
         {
-            Weapon.GetComponent<Animator>().SetTrigger("attack");
-            WeaponHitbox.GetComponent<BoxCollider2D>().enabled = true;
-            Weapon.GetComponent<WeaponScript>().DoAttack(WeaponHitbox.GetComponent<BoxCollider2D>());
-            attacking = true;
-            StartCoroutine(AttackCD());
+            switch (inventory.activeWeapon)
+            {
+                case 1:
+                    inventory.Weapons[0].GetComponent<Scythe>().DoAttack(inventory.Weapons[0].GetComponent<Scythe>().hitBox);
+                    StartCoroutine(AttackCD(0.8f));
+                    StartCoroutine(inventory.Weapons[0].GetComponent<Scythe>().Cooldown());
+                    attacking = true;
+                    break;
+                case 2:
+                    inventory.Weapons[1].GetComponent<Bow>().Shoot();
+                    StartCoroutine(AttackCD(0.4f));
+                    attacking = true;
+                    break;
+                case 3:
+                    inventory.Weapons[2].GetComponent<Animator>().SetTrigger("attack");
+                    StartCoroutine(AttackCD(0.3f));
+                    StartCoroutine(inventory.Weapons[2].GetComponent<Knife>().Stabs());
+                    attacking= true;
+                    break;
+            }
+        }
+    }
+
+    public void DropBomb(CallbackContext _context)
+    {
+        if (_context.performed && inventory.bombs > 0)
+        {
+            Instantiate(Bowomb, transform.position, Quaternion.identity);
+            inventory.bombs--;
         }
     }
 
     //disables the attack hitbox after a small amount of time and resets the animation trigger for the attack
-    IEnumerator AttackCD()
+    IEnumerator AttackCD(float time)
     {
-        yield return new WaitForSeconds(0.2f);
-        WeaponHitbox.GetComponent<BoxCollider2D>().enabled = false;
-        yield return new WaitForSeconds(0.6f);
-        Weapon.GetComponent<Animator>().ResetTrigger("attack");
+        yield return new WaitForSeconds(time);
         attacking = false;
     }
 

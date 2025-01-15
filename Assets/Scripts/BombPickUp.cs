@@ -10,7 +10,7 @@ public class BombPickUp : MonoBehaviour, IPickUpAble
     }
     public void PickUpAction(Collider2D col)
     {
-        col.GetComponent<Player>().bombs += 1;
+        col.GetComponent<Inventory>().bombs += 1;
         Destroy(gameObject);
     }
 }

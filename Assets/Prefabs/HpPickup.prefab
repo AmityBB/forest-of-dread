@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2617672923100685505}
   - component: {fileID: 1335916872748127651}
   - component: {fileID: 7155762241234389596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HpPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

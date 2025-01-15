@@ -41,21 +41,25 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isMoving)
+        Vector2 mouseScreenPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (mouseScreenPosition.x > transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        }
+        if (mouseScreenPosition.x < transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+            if (_isMoving)
         {
             if(activeSprite > 5)
             {
                 activeSprite = 0;
             }
             
-            if (moveDis.x > 0)
+            if (mouseScreenPosition.x < transform.position.x)
             {
-                transform.rotation = Quaternion.Euler(0,0,0);
-                
-            }
-            if (moveDis.x < 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
                 transform.Translate(new Vector2(-moveDis.x * 0.2f,0));
             }
             transform.Translate(moveDis.normalized * 0.1f);

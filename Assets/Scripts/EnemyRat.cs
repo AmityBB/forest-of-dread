@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyRat : Enemy
 {
-    // Update is called once per frame
     void Update()
     {
         float step = speed * Time.deltaTime;

@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class WeaponScript : MonoBehaviour
 {
-    public int baseDamage;
-    public float critRate;
-    public int critDMG;
+    [SerializeField] private int baseDamage;
+    [SerializeField] private float critRate;
+    [SerializeField] private float critDMG;
     public string element;
-    public GameObject critSpark;
+    [SerializeField] private GameObject critSpark;
 
     //attack function checks which hitboxes it's damage hitbox hit and then calculates damage for each of them separately
-    public void DoAttack(Collider2D col)
+    public virtual void DoAttack(Collider2D col)
     {
-        LayerMask mask = LayerMask.GetMask("Player", "Weapon");
+        LayerMask mask = LayerMask.GetMask("Player", "Weapon", "PickUp", "Arrow");
         Collider2D[] cols = Physics2D.OverlapBoxAll(col.bounds.center, col.bounds.extents, 0, ~mask);
         foreach(Collider2D c in cols)
         {
@@ -22,9 +23,7 @@ public class WeaponScript : MonoBehaviour
             if (Random.Range(1, 100) <= critRate)
             {
                 damage = Mathf.Round(damage * (1 + (critDMG / 100)));
-                GameObject particle =Instantiate(critSpark, transform.parent);
-                particle.transform.SetParent(transform.parent);
-                particle.transform.localPosition = new Vector2(1.1f, 0.8f);
+                GameObject particle = Instantiate(critSpark, c.transform);
                 Destroy(particle, 0.2f);
             }
 
