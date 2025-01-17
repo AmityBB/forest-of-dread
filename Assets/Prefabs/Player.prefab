@@ -273,7 +273,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8144233, y: -0.06318492}
+  m_Offset: {x: 0.4462273, y: -0.06318492}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -284,7 +284,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.422286, y: 1.0613414}
+  m_Size: {x: 1.6858947, y: 1.0613414}
   m_EdgeRadius: 0
 --- !u!50 &6193160083163660940
 Rigidbody2D:
@@ -482,6 +482,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b23733bb-6059-4731-bb63-e7efc3492f16
     m_ActionName: Game/InvSlots[/Keyboard/1,/Keyboard/2,/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9133794068181728204}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: DropBomb
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6f57ec4c-297f-43d5-b15a-f05719398df6
+    m_ActionName: Game/Bowomb[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Game
@@ -524,7 +540,9 @@ MonoBehaviour:
   deathSprites:
   - {fileID: 1375599644, guid: 0c187a32c5bde4747be8d00770b07403, type: 3}
   - {fileID: 1929632063, guid: 0c187a32c5bde4747be8d00770b07403, type: 3}
-  ScytheHitbox: {fileID: 0}
+  Bowomb: {fileID: 5891007044122396106, guid: bf640a47a7ff6bd40897c8d25a51191e, type: 3}
+  gameOverScreen: {fileID: 0}
+  attacking: 0
   health: 6
   maxHealth: 6
   money: 0
@@ -931,7 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611620fe464c74e4caa80deb93da7534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 20
+  baseDamage: 10
   critRate: 80
   critDMG: 400
   element: Fire

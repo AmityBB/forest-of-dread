@@ -12,7 +12,8 @@ public class Player : MonoBehaviour, Idamageable
 
     private Inventory inventory;
     public GameObject Bowomb;
-    private bool attacking;
+    public GameObject gameOverScreen;
+    public bool attacking;
     public float health = 6;
     public float maxHealth = 6;
     public int money;
@@ -87,5 +88,9 @@ public class Player : MonoBehaviour, Idamageable
     {
         gameObject.GetComponent<Movement>().enabled = false;
         gameObject.GetComponent<SpriteRenderer>().sprite = deathSprites[UnityEngine.Random.Range(0, deathSprites.Length)];
+        int activeWeapon = (int)inventory.activeWeapon -1;
+        inventory.Weapons[activeWeapon].SetActive(false);
+        GetComponent<Inventory>().enabled = false;
+        gameOverScreen.SetActive(true);
     }
 }

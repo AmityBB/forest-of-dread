@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyRat : Enemy
 {
-    void Update()
+    public override void Update()
     {
+        base.Update();
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
         if (player.transform.position.x > transform.position.x)

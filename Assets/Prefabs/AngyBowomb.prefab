@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 4327660550758782812}
   particle: {fileID: 5259082800759198365, guid: a5c912e34b243a749a3f331b38efa394, type: 3}
+  dmg: 500
 --- !u!50 &2751130890038590240
 Rigidbody2D:
   serializedVersion: 4

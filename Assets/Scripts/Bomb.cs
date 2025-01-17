@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public static event Action PlayerInteract;
     public BoxCollider2D explosion;
     [SerializeField] private GameObject particle;
+    [SerializeField] private float dmg;
     private void Start()
     {
         StartCoroutine(ExplodeTimer());
@@ -19,12 +19,11 @@ public class Bomb : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().health -= 1;
-            PlayerInteract.Invoke();
+            collision.gameObject.GetComponent<Player>().TakeDamage(6, "Explosion");
         }
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(200, "Explosion");
+            collision.GetComponent<Enemy>().TakeDamage(dmg, "Explosion");
         }
     }
 

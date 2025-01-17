@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, Idamageable
     public string weakness;
     private bool isSlowed;
     private bool rooted;
+    private int fireDots;
+    [SerializeField] int maxDots;
 
     public virtual void Start()
     {
@@ -41,8 +43,13 @@ public class Enemy : MonoBehaviour, Idamageable
         {
             case null: defence = baseDefence * 0.9f;
                 break;
-            case "Fire": 
-                StartCoroutine(BurnDoT(5));
+            case "Fire":
+                if (fireDots < maxDots)
+                {
+                    fireDots++;
+                    StartCoroutine(BurnDoT(5));
+                }
+                Debug.Log(fireDots);
                 break;
             case "Ice":
                 if (!isSlowed)
@@ -77,10 +84,7 @@ public class Enemy : MonoBehaviour, Idamageable
             }
         }
         health -= amount;
-        if (health < 0)
-        {
-            Die();
-        }
+        
     }
 
 
@@ -90,16 +94,20 @@ public class Enemy : MonoBehaviour, Idamageable
         yield return new WaitForSeconds(1);
         if (weakness == "Fire")
         {
-            health = health - ((baseHealth * 0.005f)* UnityEngine.Random.Range(0.85f, 1.1f));
+            health = (health - ((baseHealth * 0.005f)* UnityEngine.Random.Range(0.85f, 1.1f)) * (1 - (defence / 100)));
         }
         else
         {
-            health = health - ((baseHealth * 0.0025f)* UnityEngine.Random.Range(0.85f, 1.1f));
+            health = (health - ((baseHealth * 0.0025f)* UnityEngine.Random.Range(0.85f, 1.1f)) * (1 - (defence / 100)));
         }
         time--;
         if(time > 0)
         {
             StartCoroutine(BurnDoT(time));
+        }
+        else
+        {
+            fireDots--;
         }
     }
 
@@ -119,6 +127,13 @@ public class Enemy : MonoBehaviour, Idamageable
         isSlowed = false;
     }
 
+    public virtual void Update()
+    {
+        if (health < 0)
+        {
+            Die();
+        }
+    }
     private void Die()
     {
         if (rooted)

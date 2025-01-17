@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
 
     public void SwitchWeapon(CallbackContext _context)
     {
-        if (_context.performed) 
+        if (_context.performed && !GetComponent<Player>().attacking) 
         {
            activeWeapon = _context.ReadValue<float>();
            for (int i = 1; i <= Weapons.Count; i++)

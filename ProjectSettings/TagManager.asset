@@ -16,8 +16,8 @@ TagManager:
   - PickUp
   - Arrow
   - Enemy
-  - 
-  - 
+  - FlyingEnemy
+  - Trap
   - 
   - 
   - 
