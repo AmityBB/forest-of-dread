@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> activeWisps = new();
     public List<EnemyRoom> rooms = new();
     private Player player;
+    public GameObject pauseScreen;
+    private bool paused;
     private void Start()
     {
         rocks = FindObjectsOfType<Rock>();
@@ -72,5 +74,26 @@ public class GameManager : MonoBehaviour
         {
             rooms[i].started = false;
         }
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (paused)
+            {
+                Time.timeScale = 1;
+                pauseScreen.SetActive(false);
+                paused = false;
+                player.enabled = true;
+            }
+            else
+            {
+                Time.timeScale = 0;
+                pauseScreen.SetActive(true);
+                paused = true;
+                player.enabled = false;
+            }
+        }
+        
     }
 }

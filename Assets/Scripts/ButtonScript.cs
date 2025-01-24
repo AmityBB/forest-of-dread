@@ -45,4 +45,9 @@ public class ButtonScript : MonoBehaviour
         PlayerHPReset?.Invoke();
         gameObject.transform.parent.gameObject.SetActive(false);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
