@@ -146,3 +146,14 @@ MonoBehaviour:
   fullRock: {fileID: 21300000, guid: b0b443d1d3869344c82c5135e5ee18c1, type: 3}
   hitPoints: 3
   m_PickUp: {fileID: 0}
+  m_PickUps:
+  - {fileID: 8494396992800303967, guid: d11c60bebc44a544cbd9e9a175f883a0, type: 3}
+  - {fileID: 1304061722848136416, guid: f7a87febb9dc2ba4db6a162ecb475ad8, type: 3}
+  - {fileID: 3185076036724795703, guid: 2ca577ed4615b5e49a3f15dfa8eadb10, type: 3}
+  - {fileID: 8494396992800303967, guid: d11c60bebc44a544cbd9e9a175f883a0, type: 3}
+  - {fileID: 8494396992800303967, guid: d11c60bebc44a544cbd9e9a175f883a0, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -97,8 +97,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         gameObject.GetComponent<Movement>().enabled = false;
         gameObject.GetComponent<SpriteRenderer>().sprite = deathSprites[UnityEngine.Random.Range(0, deathSprites.Length)];
-        int activeWeapon = (int)inventory.activeWeapon -1;
-        inventory.Weapons[activeWeapon].SetActive(false);
         GetComponent<Inventory>().enabled = false;
         gameOverScreen.SetActive(true);
     }

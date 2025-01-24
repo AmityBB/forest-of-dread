@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> pickUpSpots = new();
     public List<GameObject> activePickUps = new();
     [SerializeField] private Rock[] rocks;
-    [SerializeField] private List<GameObject> explodeWalls = new();
-    public GameObject activeWisp;
+    public List<GameObject> explodeWalls = new();
+    public List<GameObject> activeWisps = new();
     public List<EnemyRoom> rooms = new();
     private Player player;
     private void Start()
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             Destroy(enemies[i]);
             enemies.RemoveAt(i);
         }
-        for(int i = 0; i < activePickUps.Count; i++)
+        for(int i = activePickUps.Count - 1; i >= 0; i--)
         {
             Destroy(activePickUps[i]);
             activePickUps.RemoveAt(i);
@@ -61,9 +61,12 @@ public class GameManager : MonoBehaviour
                 rocks[i].hitPoints = 3;
             }
         }
-        if (activeWisp != null)
+        for (int i = activeWisps.Count - 1; i >= 0; i--)
         {
-            Destroy(activeWisp);
+            if (activeWisps[i] != null)
+            {
+                Destroy(activeWisps[i]);
+            }
         }
         for(int i = 0; i < rooms.Count; i++)
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WillOWisp : MonoBehaviour
 {
+    private GameManager gameManager;
     private bool caught;
     private GameObject player;
     [SerializeField] private List<float> distances;
@@ -13,6 +14,8 @@ public class WillOWisp : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        gameManager.activeWisps.Add(gameObject);
         cam = Camera.main;
         distances[0] = Vector3.Distance(transform.position, new Vector3(cam.transform.position.x + 9, transform.position.y, 0));
         distances[1] = Vector3.Distance(transform.position, new Vector3(cam.transform.position.x - 9, transform.position.y, 0));
@@ -57,6 +60,7 @@ public class WillOWisp : MonoBehaviour
             collision.GetComponent<Movement>().enabled = false;
             caught = true;
             player.GetComponent<Player>().grabbed = true;
+            collision.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 

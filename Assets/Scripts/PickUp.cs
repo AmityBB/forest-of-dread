@@ -11,9 +11,9 @@ public class PickUp : MonoBehaviour
     public void Start()
     {
        gameManager = FindObjectOfType<GameManager>();
-        gameManager.activePickUps.Add(gameObject);
+       gameManager.activePickUps.Add(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         PickUpAction(collision);
     }
@@ -21,6 +21,7 @@ public class PickUp : MonoBehaviour
     public virtual void PickUpAction(Collider2D col)
     {
         OnPickUp?.Invoke();
+        gameManager.activePickUps.Remove(gameObject);
         Destroy(gameObject);
     }
 }

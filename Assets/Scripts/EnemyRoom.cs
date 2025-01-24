@@ -34,7 +34,7 @@ public class EnemyRoom : MonoBehaviour
             }
             if (wispSpawns.Count > 0)
             {
-                gameManager.activeWisp = Instantiate(wisp, wispSpawns[Random.Range(0, wispSpawns.Count)].transform.position, Quaternion.identity);
+                Instantiate(wisp, wispSpawns[Random.Range(0, wispSpawns.Count)].transform.position, Quaternion.identity);
             }
             started = true;
         }

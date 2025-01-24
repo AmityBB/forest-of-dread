@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brokenSprite: {fileID: 21300000, guid: d71cb328f13adf345ad9d1f8523fb1f1, type: 3}
+  fullWall: {fileID: 21300000, guid: c9321ebcafbcff244bd16137afb88cd1, type: 3}
 --- !u!61 &7811553999118596790
 BoxCollider2D:
   m_ObjectHideFlags: 0

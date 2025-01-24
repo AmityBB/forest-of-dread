@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class MudMan : Enemy
 {
+    public GameObject mudBall;
+    [SerializeField] private GameObject mudOrigin;
+    [SerializeField] private bool nearPlayer;
+    public float bulletSpeed;
     public override void Update()
     {
         base.Update();
@@ -17,5 +22,26 @@ public class MudMan : Enemy
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
+        if(Vector2.Distance(transform.position, player.transform.position) < 6 && !nearPlayer)
+        {
+            Debug.Log("Near");
+            StartCoroutine(BulletCD());
+            nearPlayer = true;
+        }
+        else if(Vector2.Distance(transform.position, player.transform.position) > 6 && nearPlayer)
+        {
+            Debug.Log("Far");
+            StopAllCoroutines();
+            nearPlayer = false;
+        }
+    }
+
+
+    IEnumerator BulletCD()
+    {
+        yield return new WaitForSeconds(2.5f);
+        GameObject mud = Instantiate(mudBall, mudOrigin.transform.position, mudOrigin.transform.rotation);
+        mud.GetComponent<Rigidbody2D>().AddForce(mudOrigin.transform.right * bulletSpeed, ForceMode2D.Impulse);
+        StartCoroutine(BulletCD());
     }
 }

@@ -55,7 +55,6 @@ public class Enemy : MonoBehaviour, IDamageable
                     fireDots++;
                     StartCoroutine(BurnDoT(5));
                 }
-                Debug.Log(fireDots);
                 break;
             case "Ice":
                 if (!isSlowed)
