@@ -19,11 +19,11 @@ public class Bomb : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(6, "Explosion");
+            collision.gameObject.GetComponent<Player>().TakeDamage(6, "Explosion", "Bomb");
         }
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(dmg, "Explosion");
+            collision.GetComponent<Enemy>().TakeDamage(dmg, "Explosion", "Bomb");
         }
     }
 

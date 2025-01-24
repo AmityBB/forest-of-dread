@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1758963652548757846}
   m_Layer: 6
   m_Name: Scythe hitbox
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856469313896839403}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 100000
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 312f0c78fa509ec4ba1c7c9f369b15b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -203,9 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 20
-  critRate: 60
+  critRate: 75
   critDMG: 200
   element: Ice
+  weapon: Ranged
   critSpark: {fileID: 2305641814987097931, guid: 80097884d34cfbd47833c971ac66bc86, type: 3}
   arrow: {fileID: 912532403183300159, guid: e47d163a9d26d3944ae3532e267937f6, type: 3}
 --- !u!1 &6822795908043309450
@@ -221,7 +222,7 @@ GameObject:
   - component: {fileID: 6193160083163660940}
   m_Layer: 6
   m_Name: Knife hitbox
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,7 +296,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6822795908043309450}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 100000
@@ -524,6 +525,7 @@ MonoBehaviour:
   - {fileID: 3799257889431857776}
   - {fileID: 8042766102702397081}
   bombs: 0
+  coins: 0
   activeWeapon: 1
 --- !u!114 &9133794068181728204
 MonoBehaviour:
@@ -543,9 +545,9 @@ MonoBehaviour:
   Bowomb: {fileID: 5891007044122396106, guid: bf640a47a7ff6bd40897c8d25a51191e, type: 3}
   gameOverScreen: {fileID: 0}
   attacking: 0
+  grabbed: 0
   health: 6
   maxHealth: 6
-  money: 0
 --- !u!114 &1877486167417682641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,10 +763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d576c7cf8568dd46a1b0c9e77942d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 30
+  baseDamage: 90
   critRate: 40
-  critDMG: 120
+  critDMG: 150
   element: Plant
+  weapon: Melee
   critSpark: {fileID: 2305641814987097931, guid: 80097884d34cfbd47833c971ac66bc86, type: 3}
   hitBox: {fileID: 7385105344341313194}
 --- !u!1 &7916610704035008698
@@ -925,7 +928,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 694bc814495081342bb3d5091ee430ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -949,10 +952,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611620fe464c74e4caa80deb93da7534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 20
   critRate: 80
-  critDMG: 400
+  critDMG: 300
   element: Fire
+  weapon: Melee
   critSpark: {fileID: 2305641814987097931, guid: 80097884d34cfbd47833c971ac66bc86, type: 3}
   hitBox: {fileID: 2488397785824243728}
 --- !u!95 &4291554942788994999

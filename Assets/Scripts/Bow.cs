@@ -8,7 +8,7 @@ public class Bow : WeaponScript
     public void Shoot()
     {
         GameObject clone = Instantiate(arrow, transform.position, transform.rotation);
-        clone.GetComponent<Rigidbody2D>().AddForce(transform.up * 10, ForceMode2D.Impulse);
+        clone.GetComponent<Rigidbody2D>().AddForce(transform.up * 4, ForceMode2D.Impulse);
         Destroy(clone, 4f);
     }
 

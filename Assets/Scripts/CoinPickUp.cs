@@ -10,7 +10,7 @@ public class CoinPickUp : MonoBehaviour, IPickUpAble
     }
     public void PickUpAction(Collider2D col)
     {
-        col.GetComponent<Player>().money += 1;
+        col.GetComponent<Inventory>().coins += 1;
         Destroy(gameObject);
     }
 }

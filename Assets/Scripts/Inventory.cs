@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public List<GameObject> Weapons = new List<GameObject>();
 
     public int bombs;
+    public int coins;
     public float activeWeapon = 1;
 
     public void SwitchWeapon(CallbackContext _context)

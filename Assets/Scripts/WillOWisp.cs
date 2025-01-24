@@ -9,26 +9,28 @@ public class WillOWisp : MonoBehaviour
     private GameObject player;
     [SerializeField] private List<float> distances;
     private Vector3 targetPos;
+    private Camera cam;
 
     private void Start()
     {
-        distances[0] = Vector3.Distance(transform.position, new Vector3(9, transform.position.y, 0));
-        distances[1] = Vector3.Distance(transform.position, new Vector3(-9, transform.position.y, 0));
-        distances[2] = Vector3.Distance(transform.position, new Vector3(transform.position.x, 5, 0));
-        distances[3] = Vector3.Distance(transform.position, new Vector3(transform.position.x, -5, 0));
+        cam = Camera.main;
+        distances[0] = Vector3.Distance(transform.position, new Vector3(cam.transform.position.x + 9, transform.position.y, 0));
+        distances[1] = Vector3.Distance(transform.position, new Vector3(cam.transform.position.x - 9, transform.position.y, 0));
+        distances[2] = Vector3.Distance(transform.position, new Vector3(transform.position.x, cam.transform.position.x + 5, 0));
+        distances[3] = Vector3.Distance(transform.position, new Vector3(transform.position.x, cam.transform.position.x - 5, 0));
         switch (GetLowest(distances))
         {
             case 0: 
-                targetPos = new Vector3(20, transform.position.y, 0);
+                targetPos = new Vector3(cam.transform.position.x + 20, transform.position.y, 0);
                 break;
             case 1:
-                targetPos = new Vector3(-20, transform.position.y, 0);
+                targetPos = new Vector3(cam.transform.position.x - 20, transform.position.y, 0);
                 break;
             case 2:
-                targetPos = new Vector3(transform.position.x, 10, 0);
+                targetPos = new Vector3(transform.position.x, cam.transform.position.y + 10, 0);
                 break;
             case 3:
-                targetPos = new Vector3(transform.position.x, -10, 0);
+                targetPos = new Vector3(transform.position.x, cam.transform.position.y  - 10, 0);
                 break;
         }
     }
@@ -54,6 +56,7 @@ public class WillOWisp : MonoBehaviour
             player = collision.gameObject;
             collision.GetComponent<Movement>().enabled = false;
             caught = true;
+            player.GetComponent<Player>().grabbed = true;
         }
     }
 
@@ -65,7 +68,7 @@ public class WillOWisp : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 0.5f);
             if(Vector3.Distance(transform.position, targetPos) < 1)
             {
-                player.GetComponent<Player>().TakeDamage(10000, "Death");
+                player.GetComponent<Player>().TakeDamage(10000, "Death", null);
                 Destroy(gameObject);
             }
         }

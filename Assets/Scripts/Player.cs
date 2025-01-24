@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Player : MonoBehaviour, Idamageable
+public class Player : MonoBehaviour, IDamageable
 {
     public static event Action OnPlayerDamaged;
 
@@ -14,9 +14,9 @@ public class Player : MonoBehaviour, Idamageable
     public GameObject Bowomb;
     public GameObject gameOverScreen;
     public bool attacking;
+    public bool grabbed;
     public float health = 6;
     public float maxHealth = 6;
-    public int money;
 
     private void Awake()
     {
@@ -27,12 +27,21 @@ public class Player : MonoBehaviour, Idamageable
     private void Update()
     {
         if(health > maxHealth) health = maxHealth;
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        if(health <= 0)
+        {
+            GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else
+        {
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
 
     // function for the main scythe attack. starts the attack animation and enables the attack hitbox
     public void MainAttack(CallbackContext _context)
     {
-        if (_context.performed && !attacking)
+        if (_context.performed && !attacking && health > 0)
         {
             switch (inventory.activeWeapon)
             {
@@ -74,7 +83,7 @@ public class Player : MonoBehaviour, Idamageable
     }
 
     //function for the player taking damage also makes an event so that the healthbar knows when the player takes damage
-    public void TakeDamage(float amount, string element)
+    public void TakeDamage(float amount, string element, string weapon)
     {
         health -= amount;
         OnPlayerDamaged?.Invoke();

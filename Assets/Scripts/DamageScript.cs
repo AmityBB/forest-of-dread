@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-interface Idamageable
+interface IDamageable
 {
-    void TakeDamage(float amount, string element);
+    void TakeDamage(float amount, string element, string weapon);
 }

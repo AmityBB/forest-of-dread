@@ -3,26 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, Idamageable
+public class Enemy : MonoBehaviour, IDamageable
 {
     public static event Action PlayerInteract;
     public GameObject player;
+    private GameManager gameManager;
 
     [SerializeField] private int damage;
-    [SerializeField] private float baseHealth;
-    [SerializeField] private float health;
+    public float baseHealth;
+    public float health;
     [SerializeField] private float baseDefence;
     [SerializeField] private float defence;
     public float speed;
-    [SerializeField] private float baseSpeed;
+    public float baseSpeed;
     public string weakness;
     private bool isSlowed;
     private bool rooted;
     private int fireDots;
     [SerializeField] int maxDots;
 
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
     public virtual void Start()
     {
+        gameManager.enemies.Add(gameObject);
         player = FindObjectOfType<Player>().gameObject;
         defence = baseDefence;
     }
@@ -32,12 +38,12 @@ public class Enemy : MonoBehaviour, Idamageable
     {
         if (collision.collider.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage, null);
+            collision.gameObject.GetComponent<Player>().TakeDamage(damage, null, null);
         }
     }
 
     //if the enemy gets hit by any source of damage it checks how much base damage it should take and of which element that attack is, then calculate the full damage it takes and activates the effects of specific elements
-    public void TakeDamage(float amount, string element)
+    public virtual void TakeDamage(float amount, string element, string weapon)
     {
         switch (element)
         {
@@ -71,7 +77,7 @@ public class Enemy : MonoBehaviour, Idamageable
                 }
                 break;
         }
-        amount = amount * (1 - (defence / 100));
+        amount *= (1 - (defence / 100));
         if(element == weakness)
         {
             if (element == null)
@@ -94,11 +100,11 @@ public class Enemy : MonoBehaviour, Idamageable
         yield return new WaitForSeconds(1);
         if (weakness == "Fire")
         {
-            health = (health - ((baseHealth * 0.005f)* UnityEngine.Random.Range(0.85f, 1.1f)) * (1 - (defence / 100)));
+            health -= ((baseHealth * 0.005f)* UnityEngine.Random.Range(0.85f, 1.1f)) * (1 - (defence / 100));
         }
         else
         {
-            health = (health - ((baseHealth * 0.0025f)* UnityEngine.Random.Range(0.85f, 1.1f)) * (1 - (defence / 100)));
+            health -= ((baseHealth * 0.0025f)* UnityEngine.Random.Range(0.85f, 1.1f)) * (1 - (defence / 100));
         }
         time--;
         if(time > 0)
@@ -116,11 +122,11 @@ public class Enemy : MonoBehaviour, Idamageable
         isSlowed = true;
         if(weakness == "Ice")
         {
-            speed = speed / 2;
+            speed /= 2;
         }
         else
         {
-            speed = speed / 1.5f;
+            speed /= 1.5f;
         }
         yield return new WaitForSeconds(time);
         speed = baseSpeed;
