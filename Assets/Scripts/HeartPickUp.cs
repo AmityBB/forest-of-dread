@@ -11,6 +11,7 @@ public class HeartPickUp : PickUp, IPickUpAble
         {
             col.GetComponent<Player>().health += 2;
             Destroy(gameObject);
+            base.PickUpAction(col);
         }
     }
 }
