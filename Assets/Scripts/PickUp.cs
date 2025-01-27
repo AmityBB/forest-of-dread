@@ -7,9 +7,12 @@ public class PickUp : MonoBehaviour
 {
     public static event Action OnPickUp;
     private GameManager gameManager;
+    private Inventory inventory;
+    public int price;
 
     public void Start()
     {
+        inventory = FindObjectOfType<Inventory>();
        gameManager = FindObjectOfType<GameManager>();
        gameManager.activePickUps.Add(gameObject);
     }
@@ -20,8 +23,12 @@ public class PickUp : MonoBehaviour
 
     public virtual void PickUpAction(Collider2D col)
     {
-        OnPickUp?.Invoke();
-        gameManager.activePickUps.Remove(gameObject);
-        Destroy(gameObject);
+        if (inventory.coins >= price)
+        {
+            inventory.coins -= price;
+            OnPickUp?.Invoke();
+            gameManager.activePickUps.Remove(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

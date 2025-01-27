@@ -9,6 +9,8 @@ public class MudMan : Enemy
     [SerializeField] private GameObject mudOrigin;
     [SerializeField] private bool nearPlayer;
     public float bulletSpeed;
+    public float shootspeed;
+    public float range;
     public override void Update()
     {
         base.Update();
@@ -22,15 +24,13 @@ public class MudMan : Enemy
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
-        if(Vector2.Distance(transform.position, player.transform.position) < 6 && !nearPlayer)
+        if(Vector2.Distance(transform.position, player.transform.position) < range && !nearPlayer)
         {
-            Debug.Log("Near");
             StartCoroutine(BulletCD());
             nearPlayer = true;
         }
-        else if(Vector2.Distance(transform.position, player.transform.position) > 6 && nearPlayer)
+        else if(Vector2.Distance(transform.position, player.transform.position) > range && nearPlayer)
         {
-            Debug.Log("Far");
             StopAllCoroutines();
             nearPlayer = false;
         }
@@ -39,7 +39,7 @@ public class MudMan : Enemy
 
     IEnumerator BulletCD()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(shootspeed);
         GameObject mud = Instantiate(mudBall, mudOrigin.transform.position, mudOrigin.transform.rotation);
         mud.GetComponent<Rigidbody2D>().AddForce(mudOrigin.transform.right * bulletSpeed, ForceMode2D.Impulse);
         StartCoroutine(BulletCD());

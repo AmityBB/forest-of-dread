@@ -232,6 +232,8 @@ MonoBehaviour:
   mudOrigin: {fileID: 4094865331307194462}
   nearPlayer: 0
   bulletSpeed: 10
+  shootspeed: 2.5
+  range: 20
 --- !u!61 &3225062760449687823
 BoxCollider2D:
   m_ObjectHideFlags: 0

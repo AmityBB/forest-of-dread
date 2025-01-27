@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, IDamageable
     public bool grabbed;
     public float health = 6;
     public float maxHealth = 6;
+    public float iframes;
 
     private void Awake()
     {
@@ -26,6 +27,10 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if(iframes > 0) 
+        {
+            iframes--;
+        }
         if(health > maxHealth) health = maxHealth;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         if(health <= 0)
@@ -85,11 +90,15 @@ public class Player : MonoBehaviour, IDamageable
     //function for the player taking damage also makes an event so that the healthbar knows when the player takes damage
     public void TakeDamage(float amount, string element, string weapon)
     {
-        health -= amount;
-        OnPlayerDamaged?.Invoke();
-        if (health <= 0)
+        if (iframes <= 0)
         {
-            Die();
+            health -= amount;
+            OnPlayerDamaged?.Invoke();
+            if (health <= 0)
+            {
+                Die();
+            }
+            iframes = 100;
         }
     }
 
